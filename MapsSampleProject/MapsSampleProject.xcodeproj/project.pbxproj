@@ -19,6 +19,8 @@
 		E836504E2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E836504D2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz */; };
 		E83650522C0D7D6300AC7254 /* zombie.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E83650512C0D7D6300AC7254 /* zombie.usdz */; };
 		E83650542C0D7F3B00AC7254 /* Walther_P88_Gun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */; };
+		E860BE722C0E7952001EE2EA /* Enhanced_Action_Explosion_Effect_part.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E860BE712C0E7952001EE2EA /* Enhanced_Action_Explosion_Effect_part.usdz */; };
+		E860BE742C0E797E001EE2EA /* Timeframe_Explosion.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E860BE732C0E797E001EE2EA /* Timeframe_Explosion.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		E836504F2C0D7A5E00AC7254 /* zombie.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = zombie.usdz; sourceTree = "<group>"; };
 		E83650512C0D7D6300AC7254 /* zombie.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = zombie.usdz; path = Assets.xcassets/zombie.dataset/zombie.usdz; sourceTree = "<group>"; };
 		E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Walther_P88_Gun.usdz; sourceTree = "<group>"; };
+		E860BE712C0E7952001EE2EA /* Enhanced_Action_Explosion_Effect_part.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Enhanced_Action_Explosion_Effect_part.usdz; sourceTree = "<group>"; };
+		E860BE732C0E797E001EE2EA /* Timeframe_Explosion.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Timeframe_Explosion.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				0240D8002BE2FE9A00231E1F /* RealityViewTutorial.swift */,
 				E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */,
 				0211FE722BAB7DB1007F045C /* Assets.xcassets */,
+				E860BE732C0E797E001EE2EA /* Timeframe_Explosion.usdz */,
+				E860BE712C0E7952001EE2EA /* Enhanced_Action_Explosion_Effect_part.usdz */,
 				E836504F2C0D7A5E00AC7254 /* zombie.usdz */,
 				E83650512C0D7D6300AC7254 /* zombie.usdz */,
 				0211FE772BAB7DB1007F045C /* Info.plist */,
@@ -226,8 +232,10 @@
 				0211FE762BAB7DB1007F045C /* Preview Assets.xcassets in Resources */,
 				E836504E2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz in Resources */,
 				0211FE8E2BAB832E007F045C /* toy_biplane_idle.usdz in Resources */,
+				E860BE722C0E7952001EE2EA /* Enhanced_Action_Explosion_Effect_part.usdz in Resources */,
 				E83650542C0D7F3B00AC7254 /* Walther_P88_Gun.usdz in Resources */,
 				E83650522C0D7D6300AC7254 /* zombie.usdz in Resources */,
+				E860BE742C0E797E001EE2EA /* Timeframe_Explosion.usdz in Resources */,
 				0211FE732BAB7DB1007F045C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

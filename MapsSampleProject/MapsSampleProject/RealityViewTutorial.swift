@@ -61,14 +61,14 @@ struct RealityViewTutorial: View {
             zombieCharacter.name = "Zombie Character"
             zombieCharacter.collision = CollisionComponent(shapes: [.generateBox(width: 1.2, height: 1.2, depth: 1.2)])
             zombieCharacter.components.set(InputTargetComponent())  // This is to detect gestures on objects
-            zombieCharacter.position = SIMD3<Float>(-0.1, 0, -0.1)
+            zombieCharacter.position = SIMD3<Float>(-3, 0, -7)
             rootEntity.addChild(zombieCharacter)
 
             // Load the gun model
             Task {
                 if let gunEntity = await loadGunModel() {
                     gunEntity.name = "Gun"
-                    gunEntity.position = SIMD3<Float>(0, 0.4, -0.3) // Adjust position relative to user
+                    gunEntity.position = SIMD3<Float>(0, 0.4, -1.4) // Adjust position relative to user
                     
                     gunEntity.setScale(SIMD3<Float>(0.002, 0.002, 0.002), relativeTo: nil)
                     let rotation = simd_quatf(angle: 3 * .pi / 2, axis: SIMD3<Float>(0, 1, 0)) // Rotate 90 degrees around the Y-axis
@@ -162,17 +162,27 @@ struct RealityViewTutorial: View {
         if entity.name == "Zombie Character" {
             print("Hit the zombie!")
             
+            // Get the zombie's current position
+            let zombiePosition = entity.position
+            
+            
             // Add muzzle flash
             if let gunEntity = rootEntity.findEntity(named: "Gun") {
                
                 
-                let flash = createMuzzleFlash()
-                rootEntity.addChild(flash)
+//                let flash = createMuzzleFlash(pos: gunEntity.position, r: 0.2)
+//                rootEntity.addChild(flash)
+                let flash2 = createMuzzleFlash(pos: zombiePosition, r: 2.0)
                 
                 // Remove flash after a short delay
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                    flash.removeFromParent()
-//                }
+                rootEntity.addChild(flash2)
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    flash2.removeFromParent()
+                }
+                
+                
             }
         
             
@@ -181,13 +191,16 @@ struct RealityViewTutorial: View {
     }
     
     // Create a muzzle flash effect
-    func createMuzzleFlash() -> ModelEntity {
+    func createMuzzleFlash(pos: SIMD3<Float>, r: Float) -> ModelEntity {
         
         print("Created muzzle flash.")
-        let flashEntity = ModelEntity(mesh: .generateSphere(radius: 0.4), materials: [SimpleMaterial(color: .yellow, isMetallic: true)])
-        flashEntity.position = SIMD3<Float>(0, +0.7, -0.7) // Position the flash at the  gun's muzzle
-        flashEntity.setScale(SIMD3<Float>(0.1, 0.1, 0.1), relativeTo: flashEntity)
-        return flashEntity
+//        let flashEntity = ModelEntity(mesh: .generateSphere(radius: 0.4), materials: [SimpleMaterial(color: .orange, isMetallic: true)])
+        let flashEntity =  try! ModelEntity.load(named: "Timeframe_Explosion.usdz")
+        flashEntity.position = pos // Position the flash at the  gun's muzzle
+        flashEntity.setScale(SIMD3<Float>(r, r, r), relativeTo: flashEntity)
+        let flashE = ModelEntity()
+        flashE.addChild(flashEntity)
+        return flashE
     }
     
     
