@@ -3,7 +3,7 @@
 //  MapsSampleProject
 //
 //  Created by Umar Patel on 5/1/24.
-//  Updated by Ansh Khurana on 6/2/24.
+//  Updated by Ansh Khurana 6/2/24.
 //
 
 import SwiftUI
@@ -11,13 +11,13 @@ import RealityKit
 import RealityKitContent
 import ARKit
 import Foundation
-import AVFoundation
 
 // Note on SIMD3
 // (x, y, z)
 // x is left and right in the simulator and in world space (left is negative, right is positive)
 // y is up and down (up is positive, down is negative)
-// z is forward and back (forward is negative, back is positive).
+// z is forward and back (forward is negative, back is positive). 
+
 
 struct RealityViewTutorial: View {
     @Binding var startCharacterMovement: Bool   // This is basically to start the movement of the zombie and the entire experience
@@ -37,6 +37,8 @@ struct RealityViewTutorial: View {
     @State var zombieAnimation: AnimationPlaybackController?
     @State var currentZombieDirection: String = "right"
     @State var animationStarted: Bool = false
+    
+    
     @State var timer: Timer?
     
     var body: some View {
@@ -45,8 +47,10 @@ struct RealityViewTutorial: View {
         }
         .onChange(of: startCharacterMovement) {
             if startCharacterMovement {
-                timer = Timer.scheduledTimer(withTimeInterval: 4.05, repeats: true) { _ in
-                    moveZombie(amount: 4.0, direction: currentZombieDirection)
+                if startCharacterMovement {
+                    timer = Timer.scheduledTimer(withTimeInterval: 4.05, repeats: true) { _ in
+                        moveZombie(amount: 4.0, direction: currentZombieDirection)
+                    }
                 }
             }
         }
@@ -56,52 +60,61 @@ struct RealityViewTutorial: View {
             // Create an entity that will move from one side of the room to another.
             let zombieEntity = try! Entity.loadModel(named: "zombie.usdz")
             
+//            let zombieCharacter = ModelEntity(
+//                mesh:.generateCylinder(height: 1, radius: 0.4),
+//                materials: 
+//                    [SimpleMaterial(color: .blue, isMetallic: false)]
+//            )
+                
+//           let's load a real zombie
+            
             let zombieCharacter = ModelEntity()
-            zombieCharacter.addChild(zombieEntity)
+                zombieCharacter.addChild(zombieEntity)
+
+            
             zombieCharacter.name = "Zombie Character"
-            zombieCharacter.collision = CollisionComponent(shapes: [.generateBox(width: 1.2, height: 1.2, depth: 1.2)])
+            
+            zombieCharacter.collision = CollisionComponent(shapes: [.generateBox(width: 0.8, height: 1.0, depth: 0.8)])
+            
             zombieCharacter.components.set(InputTargetComponent())  // This is to detect gestures on objects
-            zombieCharacter.position = SIMD3<Float>(-0.1, 0, -0.1)
+            
+            zombieCharacter.position = SIMD3<Float>(-3, 0.1, -3)
+            
             rootEntity.addChild(zombieCharacter)
 
-            // Load the gun model
-            Task {
-                if let gunEntity = await loadGunModel() {
-                    gunEntity.name = "Gun"
-                    gunEntity.position = SIMD3<Float>(0, 0.4, -0.3) // Adjust position relative to user
-                    
-                    gunEntity.setScale(SIMD3<Float>(0.002, 0.002, 0.002), relativeTo: nil)
-                    let rotation = simd_quatf(angle: 3 * .pi / 2, axis: SIMD3<Float>(0, 1, 0)) // Rotate 90 degrees around the Y-axis
-                    gunEntity.setOrientation(rotation, relativeTo: nil)
-                    rootEntity.addChild(gunEntity)
-                }
-            }
-
             content.add(rootEntity)
+
         }
         .onAppear {
-            // Handle any additional setup when view appears
+            // Start the zombie animation (going right)
+            // moveZombie(amount: 4.0, direction: "right")
+            // print("London")
+            
         }
         .gesture(SpatialTapGesture()
             .targetedToAnyEntity()
-            .onEnded { value in
-                let entity = value.entity
-                shoot(at: entity)
-            }
+            .onEnded({ value in
+                print(rootEntity)
+                // moveZombie(amount: 4.0, direction: currentZombieDirection)
+                print("currentZombieDirection")
+            })
         )
+        
+        
+        
     }
     
-    func loadGunModel() async -> ModelEntity? {
-        do {
-            let gunEntity = try await ModelEntity.init(named: "Walther_P88_Gun.usdz")
-            return gunEntity
-        } catch {
-            print("Failed to load the gun model: \(error)")
-            return nil
+    /*
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 4.05, repeats: true) { _ in
+            moveZombie(amount: 4.0, direction: currentZombieDirection)
         }
     }
+    */
     
     func moveZombie(amount: Float, direction: String) {
+        // Access the Zombie Character entity and then move it
+        // Access through root child
         print("Manchester")
         if let zombieCharacter = findEntityByName(named: "Zombie Character", in: rootEntity) {
             let currentTransform = zombieCharacter.transform.matrix
@@ -116,6 +129,7 @@ struct RealityViewTutorial: View {
             else if direction == "back" {
                 newTransform.columns.3.z += amount
                 currentZombieDirection = "left"
+
             }
             else if direction == "left" {
                 newTransform.columns.3.x -= amount
@@ -126,6 +140,7 @@ struct RealityViewTutorial: View {
                 currentZombieDirection = "right"
             }
             
+            
             zombieAnimation = zombieCharacter.move(
                 to: newTransform,
                 relativeTo: nil,
@@ -134,9 +149,18 @@ struct RealityViewTutorial: View {
             )
             print("Notting Hill")
             print(zombieAnimation!.duration)
+            
+            // Run this function again? It will only stop when
+            
+                    
         }
     }
     
+    
+    
+    /*
+     This function finds an entity in the scene by name.
+     */
     func findEntityByName(named targetName: String, in rootEntity: Entity) -> Entity? {
         var stack = [Entity]()
         stack.append(rootEntity)
@@ -153,49 +177,15 @@ struct RealityViewTutorial: View {
             stack.append(contentsOf: current.children)
         }
         
+        
         return nil
     }
     
-    // Function to handle tap gesture
-    func shoot(at entity: Entity) {
-        print(entity.name)
-        if entity.name == "Zombie Character" {
-            print("Hit the zombie!")
-            
-            // Add muzzle flash
-            if let gunEntity = rootEntity.findEntity(named: "Gun") {
-               
-                
-                let flash = createMuzzleFlash()
-                rootEntity.addChild(flash)
-                
-                // Remove flash after a short delay
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                    flash.removeFromParent()
-//                }
-            }
-        
-            
-            
-        }
-    }
-    
-    // Create a muzzle flash effect
-    func createMuzzleFlash() -> ModelEntity {
-        
-        print("Created muzzle flash.")
-        let flashEntity = ModelEntity(mesh: .generateSphere(radius: 0.4), materials: [SimpleMaterial(color: .yellow, isMetallic: true)])
-        flashEntity.position = SIMD3<Float>(0, +0.7, -0.7) // Position the flash at the  gun's muzzle
-        flashEntity.setScale(SIMD3<Float>(0.1, 0.1, 0.1), relativeTo: flashEntity)
-        return flashEntity
-    }
-    
-    
 }
+
 
 /*
 #Preview {
     RealityViewTutorial(startCharacterMovement: <#Binding<Bool>#>)
 }
 */
-
