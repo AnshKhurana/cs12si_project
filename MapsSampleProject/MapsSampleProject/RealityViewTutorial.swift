@@ -3,6 +3,7 @@
 //  MapsSampleProject
 //
 //  Created by Umar Patel on 5/1/24.
+//  Updated by Ansh Khurana 6/2/24.
 //
 
 import SwiftUI
@@ -56,11 +57,19 @@ struct RealityViewTutorial: View {
         RealityView { content in
             
             // Create an entity that will move from one side of the room to another.
-            let zombieCharacter = ModelEntity(
-                mesh:.generateCylinder(height: 1, radius: 0.4),
-                materials: 
-                    [SimpleMaterial(color: .blue, isMetallic: false)]
-            )
+            let zombieEntity = try! Entity.loadModel(named: "zombie.usdz")
+            
+//            let zombieCharacter = ModelEntity(
+//                mesh:.generateCylinder(height: 1, radius: 0.4),
+//                materials: 
+//                    [SimpleMaterial(color: .blue, isMetallic: false)]
+//            )
+                
+//           let's load a real zombie
+            
+            let zombieCharacter = ModelEntity()
+                zombieCharacter.addChild(zombieEntity)
+
             
             zombieCharacter.name = "Zombie Character"
             
@@ -68,7 +77,7 @@ struct RealityViewTutorial: View {
             
             zombieCharacter.components.set(InputTargetComponent())  // This is to detect gestures on objects
             
-            zombieCharacter.position = SIMD3<Float>(-3, 1, -3)
+            zombieCharacter.position = SIMD3<Float>(-3, 0.1, -3)
             
             rootEntity.addChild(zombieCharacter)
 

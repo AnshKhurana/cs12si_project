@@ -16,6 +16,9 @@
 		0211FE8C2BAB8028007F045C /* MapExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211FE8B2BAB8028007F045C /* MapExperience.swift */; };
 		0211FE8E2BAB832E007F045C /* toy_biplane_idle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0211FE8D2BAB832E007F045C /* toy_biplane_idle.usdz */; };
 		0240D8012BE2FE9A00231E1F /* RealityViewTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0240D8002BE2FE9A00231E1F /* RealityViewTutorial.swift */; };
+		E836504E2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E836504D2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz */; };
+		E83650522C0D7D6300AC7254 /* zombie.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E83650512C0D7D6300AC7254 /* zombie.usdz */; };
+		E83650542C0D7F3B00AC7254 /* Walther_P88_Gun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,10 @@
 		0211FE8B2BAB8028007F045C /* MapExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExperience.swift; sourceTree = "<group>"; };
 		0211FE8D2BAB832E007F045C /* toy_biplane_idle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_biplane_idle.usdz; sourceTree = "<group>"; };
 		0240D8002BE2FE9A00231E1F /* RealityViewTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityViewTutorial.swift; sourceTree = "<group>"; };
+		E836504D2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = "High-detailed_Zombie_Full-Rigged_and_animated.usdz"; path = "../../../../../Downloads/High-detailed_Zombie_Full-Rigged_and_animated.usdz"; sourceTree = "<group>"; };
+		E836504F2C0D7A5E00AC7254 /* zombie.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = zombie.usdz; sourceTree = "<group>"; };
+		E83650512C0D7D6300AC7254 /* zombie.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = zombie.usdz; path = Assets.xcassets/zombie.dataset/zombie.usdz; sourceTree = "<group>"; };
+		E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Walther_P88_Gun.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +91,16 @@
 		0211FE692BAB7DB0007F045C /* MapsSampleProject */ = {
 			isa = PBXGroup;
 			children = (
+				E83650502C0D7D1700AC7254 /* Resources */,
 				0211FE8D2BAB832E007F045C /* toy_biplane_idle.usdz */,
 				0211FE6E2BAB7DB0007F045C /* MapsSampleProjectApp.swift */,
 				0211FE702BAB7DB0007F045C /* ContentView.swift */,
 				0211FE8B2BAB8028007F045C /* MapExperience.swift */,
 				0240D8002BE2FE9A00231E1F /* RealityViewTutorial.swift */,
+				E83650532C0D7F3B00AC7254 /* Walther_P88_Gun.usdz */,
 				0211FE722BAB7DB1007F045C /* Assets.xcassets */,
+				E836504F2C0D7A5E00AC7254 /* zombie.usdz */,
+				E83650512C0D7D6300AC7254 /* zombie.usdz */,
 				0211FE772BAB7DB1007F045C /* Info.plist */,
 				0211FE742BAB7DB1007F045C /* Preview Content */,
 			);
@@ -116,8 +127,16 @@
 			isa = PBXGroup;
 			children = (
 				0211FE802BAB7DB1007F045C /* MapsSampleProjectTests.swift */,
+				E836504D2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz */,
 			);
 			path = MapsSampleProjectTests;
+			sourceTree = "<group>";
+		};
+		E83650502C0D7D1700AC7254 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +224,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0211FE762BAB7DB1007F045C /* Preview Assets.xcassets in Resources */,
+				E836504E2C0D7A5B00AC7254 /* High-detailed_Zombie_Full-Rigged_and_animated.usdz in Resources */,
 				0211FE8E2BAB832E007F045C /* toy_biplane_idle.usdz in Resources */,
+				E83650542C0D7F3B00AC7254 /* Walther_P88_Gun.usdz in Resources */,
+				E83650522C0D7D6300AC7254 /* zombie.usdz in Resources */,
 				0211FE732BAB7DB1007F045C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
